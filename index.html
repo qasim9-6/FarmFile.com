@@ -1,0 +1,111 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>FarmFile</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Sign In Page -->
+        <div id="signin" class="page active">
+            <h1>Sign In</h1>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <label><input type="checkbox" id="keepLoggedIn"> Keep me logged in</label>
+            <button onclick="signIn()">Sign In</button>
+            <p>Not registered? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+        </div>
+
+        <!-- Sign Up Page -->
+        <div id="signup" class="page hidden">
+            <h1>Sign Up</h1>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="newUsername" placeholder="Username" required>
+            <input type="password" id="newPassword" placeholder="Password" required>
+            <button onclick="register()">Register</button>
+            <button onclick="showSignIn()">Back to Sign In</button>
+        </div>
+
+        <!-- Gender Selection Page -->
+        <div id="genderSelection" class="page hidden">
+            <h1>Select Animal Gender</h1>
+            <button onclick="setGender('male')">Male</button>
+            <button onclick="setGender('female')">Female</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Animal List Page -->
+        <div id="animalList" class="page hidden">
+            <h1>Animal List</h1>
+            <input type="text" id="search" placeholder="Search..." oninput="filterAnimals()">
+            <div id="searchResult" class="hidden">No results found.</div>
+            <ul id="animalNames"></ul>
+            <button onclick="showAddAnimal()">Add Animal</button>
+            <button onclick="showGenderSelection()">Back</button>
+        </div>
+
+        <!-- Add Animal Page -->
+        <div id="addAnimal" class="page hidden">
+            <h1>Add Animal Details</h1>
+            <input type="text" id="animalName" placeholder="Name" required>
+            <input type="number" id="birthWeight" placeholder="Birth Weight (kg)" required>
+            <input type="date" id="birthDate" onchange="updateAge()">
+            <div>Age: <span id="age">0 days</span></div>
+            <h3>Treatment</h3>
+            <select id="medicineSelect">
+                <option value="">Select Medicine</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+            </select>
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" onchange="updateEndDate()">
+            <label for="dose">Dose</label>
+            <input type="number" id="dose" value="0" min="0" readonly>
+            <button onclick="incrementDose()">+</button>
+            <button onclick="decrementDose()">-</button>
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" readonly>
+            <button onclick="saveAnimal()">Save</button>
+            <button onclick="showAnimalList()">Back</button>
+        </div>
+
+        <!-- Animal Details Page -->
+        <div id="animalDetails" class="page hidden">
+            <h1>Animal Details</h1>
+            <div id="detailsContent"></div>
+            <button onclick="showAnimalList()">Back</button>
+            <button onclick="showEditAnimal()">Edit</button>
+            <button onclick="deleteAnimal()">Delete</button>
+        </div>
+
+        <!-- Edit Animal Page -->
+        <div id="editAnimal" class="page hidden">
+            <h1>Edit Animal Details</h1>
+            <input type="text" id="editAnimalName" required>
+            <input type="number" id="editBirthWeight" placeholder="Birth Weight (kg)" required>
+            <input type="date" id="editBirthDate">
+            <div>Age: <span id="editAge">0 days</span></div>
+            <h3>Treatment</h3>
+            <select id="editMedicineSelect">
+                <option value="">Select Medicine</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+            </select>
+            <label for="editStartDate">Start Date</label>
+            <input type="date" id="editStartDate" onchange="updateEditEndDate()">
+            <label for="editDose">Dose</label>
+            <input type="number" id="editDose" value="0" min="0" readonly>
+            <button onclick="incrementEditDose()">+</button>
+            <button onclick="decrementEditDose()">-</button>
+            <label for="editEndDate">End Date</label>
+            <input type="date" id="editEndDate" readonly>
+            <button onclick="updateAnimal()">Update</button>
+            <button onclick="showAnimalDetails()">Back</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
